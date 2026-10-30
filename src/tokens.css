@@ -1,0 +1,340 @@
+/* 晏銘湛箴 · 設計系統 Tokens（DTCG 來源）
+ * 色票來源：E:\晏銘湛箴\底層架構\色系圖譜\色卡.md
+ * 家族 A（淺色、愉悅、年輕）：#B9DDF1 / #F4DDE7 / #F8F6EF / #CDBFE0
+ * 家族 B（淺色、茶色、端莊）：#B7C8A8 / #E8E3CC / #CBBF9E / #A38E7a
+ * 深色：各家族對應莫蘭蒂色系，原色不得更動
+ */
+
+/* ── 深色模式的暗色底座（家族 B 四色不作底色，僅作強調/文字/邊框）── */
+/* 暖調深綠灰三級：bg / surface / raised */
+
+:root {
+  /* 家族 A 原色（語義角色） */
+  --color-accent-a: #B9DDF1; /* 標籤、手繪裝飾、選中態底色 */
+  --color-tag-a: #F4DDE7;    /* 輕柔點綴、重點提示 */
+  --color-bg-a: #F8F6EF;     /* 暖紙白：頁面底色 */
+  --color-brand-a: #CDBFE0;  /* 品牌次強調：徽章描邊、焦點環 */
+
+  /* 家族 B 原色（語義角色，僅強調/文字/邊框，不作底色） */
+  --color-accent-b: #B7C8A8; /* 鼠尾草綠 */
+  --color-tag-b: #E8E3CC;    /* 奶油米 */
+  --color-surface-b-1: #CBBF9E; /* 沙金 */
+  --color-surface-b-2: #A38E7A; /* 可可棕 */
+
+  /* 家族 A 深色對應（莫蘭蒂，原文色卡） */
+  --color-bg-a-dark: #191C29;
+  --color-surface-a-dark: #1E3029;
+  --color-raised-a-dark: #4A3528;
+  --color-accent-a-dark: #9FA98F;
+
+  /* 家族 B 深色對應（莫蘭蒂，原文色卡） */
+  --color-bg-b-dark: #1A1C29;
+  --color-surface-b-dark: #31263A;
+  --color-raised-b-dark: #333A4E;
+  --color-accent-b-dark: #95A7B7;
+
+  /* ── 深色模式暗色底座（用戶規範：暖調深綠灰三級）── */
+  --color-bg-dark-1: #1F2420;
+  --color-bg-dark-2: #262C27;
+  --color-bg-dark-3: #2F362F;
+
+  /* ── 當前主題變數（由 .light / .dark 家族切換）── */
+  --color-bg: var(--color-bg-a);
+  --color-surface: #FFFFFF;
+  --color-surface-raised: #F3EFE3;
+  --color-surface-0: #FFFFFF;
+  --color-surface-1: #F8F6EF;
+  --color-surface-2: #F0ECE0;
+  --color-surface-3: #E8E3CC;
+  --color-accent: var(--color-accent-a);
+  --color-accent-hover: #A7CBE0;
+  --color-brand: var(--color-brand-a);
+  --color-tag: var(--color-tag-a);
+  --color-ink: #2B3440;
+  --color-ink-secondary: #5A6470;
+  --color-ink-tertiary: #8A94A0;
+  --color-on-accent: #191C29;
+  --color-border: #E4DBD0;
+  --color-success: var(--color-accent-b);
+  --color-warning: var(--color-tag-b);
+  --color-error: var(--color-surface-b-2);
+
+  /* 尺寸與圓角 */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* 間距 */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+
+  /* 字體 */
+  --font-sans: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Noto Serif TC', 'LXGW WenKai', serif;
+  --font-hand: 'LXGW WenKai', 'Noto Serif TC', serif;
+
+  /* 動效 */
+  --transition-fast: 120ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* 陰影（溫潤咬合感，不用純黑） */
+  --shadow-sm: 0 1px 2px rgba(43, 52, 64, 0.06);
+  --shadow-md: 0 4px 12px rgba(43, 52, 64, 0.08);
+  --shadow-lg: 0 8px 24px rgba(43, 52, 64, 0.10);
+
+  /* 觸控熱區鐵律：最小 48×48 CSS px */
+  --hit-area-min: 48px;
+
+  /* Z-index 分層 */
+  --z-dropdown: 100;
+  --z-modal: 200;
+  --z-toast: 300;
+}
+
+/* ── 淺色：家族 A ── */
+[data-theme="light-a"] {
+  --color-bg: #F8F6EF;
+  --color-surface: #FFFFFF;
+  --color-surface-raised: #F3EFE3;
+  --color-accent: #B9DDF1;
+  --color-accent-hover: #A7CBE0;
+  --color-brand: #CDBFE0;
+  --color-tag: #F4DDE7;
+  --color-ink: #2B3440;
+  --color-ink-secondary: #5A6470;
+  --color-ink-tertiary: #8A94A0;
+  --color-on-accent: #191C29;
+  --color-border: #E4DBD0;
+  --color-surface-0: #FFFFFF;
+  --color-surface-1: #F8F6EF;
+  --color-surface-2: #F0ECE0;
+  --color-surface-3: #E8E3CC;
+}
+
+/* ── 淺色：家族 B ── */
+[data-theme="light-b"] {
+  --color-bg: #F7F4EC;
+  --color-surface: #FFFFFF;
+  --color-surface-raised: #F0EBDF;
+  --color-accent: #B7C8A8;
+  --color-accent-hover: #A8B89A;
+  --color-brand: #A38E7A;
+  --color-tag: #E8E3CC;
+  --color-ink: #3A362E;
+  --color-ink-secondary: #6E685E;
+  --color-ink-tertiary: #9A9385;
+  --color-on-accent: #2E2B25;
+  --color-border: #D9D3C4;
+  --color-surface-0: #FFFFFF;
+  --color-surface-1: #F7F4EC;
+  --color-surface-2: #EFE8D8;
+  --color-surface-3: #E4DBC9;
+}
+
+/* ── 深色：家族 A ── */
+[data-theme="dark-a"] {
+  --color-bg: #191C29;
+  --color-surface: #1E3029;
+  --color-surface-raised: #4A3528;
+  --color-accent: #9FA98F;
+  --color-accent-hover: #A8B89A;
+  --color-brand: #CDBFE0;
+  --color-tag: #2E3A34;
+  --color-ink: #E2E4ED;
+  --color-ink-secondary: #C7CAD5;
+  --color-ink-tertiary: #8A94A0;
+  --color-on-accent: #191C29;
+  --color-border: #3A4450;
+  --color-success: #9FA98F;
+  --color-warning: #E8E3CC;
+  --color-error: #A38E7A;
+  --color-surface-0: #1E3029;
+  --color-surface-1: #191C29;
+  --color-surface-2: #161A24;
+  --color-surface-3: #0F1219;
+}
+
+/* ── 深色：家族 B ── */
+[data-theme="dark-b"] {
+  --color-bg: #1A1C29;
+  --color-surface: #31263A;
+  --color-surface-raised: #333A4E;
+  --color-accent: #95A7B7;
+  --color-accent-hover: #A7B8C7;
+  --color-brand: #CDBFE0;
+  --color-tag: #3A3042;
+  --color-ink: #E2E4ED;
+  --color-ink-secondary: #C7CAD5;
+  --color-ink-tertiary: #8A94A0;
+  --color-on-accent: #1A1C29;
+  --color-border: #4A3E55;
+  --color-success: #95A7B7;
+  --color-warning: #E8E3CC;
+  --color-error: #A38E7A;
+  --color-surface-0: #31263A;
+  --color-surface-1: #1A1C29;
+  --color-surface-2: #14151E;
+  --color-surface-3: #0E0F16;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-tap-highlight-color: transparent; }
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ── 通用 HitArea（鐵律：48×48，不改版面）── */
+.hit-area {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--hit-area-min);
+  min-height: var(--hit-area-min);
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+.hit-area::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+  opacity: 0;
+}
+.hit-area:active::before {
+  opacity: 0.12;
+}
+.hit-area:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* ── 按鈕 ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--hit-area-min);
+  min-height: var(--hit-area-min);
+  padding: var(--space-sm) var(--space-lg);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.btn:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+.btn-primary {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+.btn-primary:hover { background: var(--color-accent-hover); }
+.btn-primary:active { transform: scale(0.98); }
+.btn-ghost {
+  background: transparent;
+  color: var(--color-ink);
+  border: 1px solid var(--color-border);
+}
+.btn-ghost:hover { background: var(--color-surface-raised); }
+.btn-danger {
+  background: var(--color-error);
+  color: #FFFFFF;
+}
+.btn-danger:hover { filter: brightness(0.92); }
+
+/* ── 輸入框 ── */
+.input {
+  width: 100%;
+  min-height: var(--hit-area-min);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+.input:focus {
+  outline: none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px rgba(205, 191, 224, 0.25);
+}
+.textarea {
+  min-height: 200px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+/* ── 卡片 ── */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── 標籤 ── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--color-tag);
+  color: var(--color-ink);
+}
+
+/* ── 標題 ── */
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.02em; }
+h1 { font-size: 28px; margin-bottom: var(--space-lg); }
+h2 { font-size: 20px; margin-bottom: var(--space-md); }
+
+/* ── 文字 ── */
+p { margin-bottom: var(--space-md); }
+.muted { color: var(--color-ink-secondary); }
+.small { font-size: 13px; }
+
+/* ── 水墨暈染出現動效 ── */
+@keyframes ink-wash-in {
+  from { opacity: 0; filter: blur(6px); transform: translateY(4px); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+.ink-wash {
+  animation: ink-wash-in var(--transition-base) both;
+}
+.ink-wash > * {
+  animation-delay: calc(var(--i, 0) * 30ms);
+  animation-fill-mode: both;
+}
+
+/* ── 減少動態 ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
