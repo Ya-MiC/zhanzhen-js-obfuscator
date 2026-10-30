@@ -1,0 +1,17 @@
+[package]
+name = "zhanzhen-js-obfuscator"
+version = "0.1.0"
+description = "本地優先 JavaScript 混淆工具（Tauri 2 + Vue 3），全程離線，不上傳代碼。"
+edition = "2021"
+
+[dependencies]
+tauri = { version = "2", features = ["dialog-all", "fs-all", "notification-all", "shell-all"] }
+serde = { version = "1", features = ["derive"] }
+
+[[bin]]
+name = "zhanzhen-js-obfuscator"
+path = "src/main.rs"
+
+[profile.release]
+lto = true
+opt-level = "z"
